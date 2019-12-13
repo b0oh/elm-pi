@@ -10,9 +10,9 @@ type alias State =
 start : Pi out -> ( Pid, Pi out )
 start pi =
     let
-        loop self =
+        loop state =
             Pi.receive <| \message pi0 ->
-            ( loop self, Pi.sendOut message pi0 )
+            ( loop state, Pi.sendOut message pi0 )
     in
     Pi.spawn (\self -> loop { self = self }) pi
 
